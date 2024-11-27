@@ -1,12 +1,10 @@
 /*
- * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 only, as
- * published by the Free Software Foundation.  Oracle designates this
- * particular file as subject to the "Classpath" exception as provided
- * by Oracle in the LICENSE file that accompanied this code.
+ * published by the Free Software Foundation.
  *
  * This code is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
@@ -22,17 +20,20 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package sun.awt;
 
-import java.awt.AWTPermission;
+package compiler.debug;
 
-/**
- * Defines the {@code AWTPermission} objects used for permission checks.
+/*
+ * @test
+ * @bug 8344013
+ * @requires vm.debug == true & vm.compiler2.enabled
+ * @summary Verify the xmlStream log stack is not left in a bad state
+ * @run main/othervm -XX:+LogCompilation -XX:CompileCommand=log,*.* -XX:+CITimeVerbose -Xcomp compiler.debug.TestLogStackAssert
  */
+public class TestLogStackAssert {
 
-public final class AWTPermissions {
-    private AWTPermissions() { }
+    public static void main(String[] args) throws Exception {
+        System.out.println("Test passed!");
+    }
 
-    public static final AWTPermission ACCESS_CLIPBOARD_PERMISSION =
-        new AWTPermission("accessClipboard");
 }
