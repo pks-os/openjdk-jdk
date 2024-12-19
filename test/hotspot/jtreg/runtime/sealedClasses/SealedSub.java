@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, 2024, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2024, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -19,28 +19,6 @@
  * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
  * or visit www.oracle.com if you need additional information or have any
  * questions.
- *
  */
-
-#include "precompiled.hpp"
-#include "gc/g1/g1CollectedHeap.inline.hpp"
-#include "gc/g1/g1ConcurrentMarkBitMap.inline.hpp"
-#include "gc/g1/g1HeapRegion.hpp"
-
-G1CMBitMap::G1CMBitMap() : MarkBitMap(), _listener() {
-  _listener.set_bitmap(this);
-}
-
-void G1CMBitMap::initialize(MemRegion heap, G1RegionToSpaceMapper* storage) {
-  MarkBitMap::initialize(heap, storage->reserved());
-  storage->set_mapping_changed_listener(&_listener);
-}
-
-void G1CMBitMapMappingChangedListener::on_commit(uint start_region, size_t num_regions, bool zero_filled) {
-  if (zero_filled) {
-    return;
-  }
-  // We need to clear the bitmap on commit, removing any existing information.
-  MemRegion mr(G1CollectedHeap::heap()->bottom_addr_for_region(start_region), num_regions * G1HeapRegion::GrainWords);
-  _bm->clear_range(mr);
+public final class SealedSub extends SealedSuper {
 }
